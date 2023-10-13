@@ -1,3 +1,21 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/babel","next/core-web-vitals"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+
+  "plugins": ["react"],
+
+  "rules": {
+    // "react/jsx-boolean-value": "always",
+    // "react/jsx-indent": [2, 2],
+    // "react/jsx-indent-props": [2, 2],
+    "no-console": "error",
+    "semi": 0
+  }
 }
