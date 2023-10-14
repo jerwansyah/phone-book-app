@@ -30,8 +30,8 @@ export const global = css`
   }
 
   body {
-    color: var(--neutral-black, #212121);
-    background: var(--neutral-white, #FFF);
+    color: rgb(var(--neutral-black, #212121));
+    background: rgb(var(--neutral-white, #FFF));
   }
 
   a {
@@ -112,7 +112,7 @@ export const global = css`
     line-height: 16px;
   }
 
-  @media (min-width: 576px) {
+  @media screen and (min-width: 576px) {
     .text-body-1 {
       font-size: 18px;
       line-height: 28px;
