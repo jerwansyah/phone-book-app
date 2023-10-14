@@ -18,7 +18,12 @@ export default function RootLayout({
     <>
       <GlobalStyles />
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body
+          suppressContentEditableWarning
+          className={inter.className}
+        >
+          {children}
+        </body>
       </html>
     </>
   )

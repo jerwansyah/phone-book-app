@@ -1,4 +1,6 @@
 import { css } from '@emotion/react'
+import { resets } from './resets'
+import { forms } from './forms'
 
 export const global = css`
   :root {
@@ -11,6 +13,7 @@ export const global = css`
 
     --primary-blue-medium: 6, 113, 224;
     --primary-blue-light: 238, 245, 252;
+    --primary-azure: 219, 237, 255;
 
     --danger-red-medium: 224, 43, 29;
     --danger-red-light: 224, 21, 7;
@@ -21,13 +24,12 @@ export const global = css`
 
     --warning-yellow-medium: 255, 178, 64;
     --warning-yellow-light: 255, 248, 236;
+
+    --font-family: 'Inter', sans-serif;
   }
 
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
+  ${resets}
+  ${forms}
 
   body {
     color: rgb(var(--neutral-black, #212121));
