@@ -1,7 +1,7 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
@@ -56,22 +56,35 @@ const handleBulkEdit = () => {
 }
 
 const Header: FC<Header> = () => {
+  const [isSearching, setIsSearching] = useState(false)
+
   return (
     <header css={[shadow4px, headerStyle]}>
       <h3>Contact List</h3>
       <ActionsRight nCol="3">
         <Link href="/contact-details">
-          <Plus css={[responsiveIcon(iconSizes), actionIcon]}
-            onClick={handleAddContact} />
+          <Plus
+            css={[responsiveIcon(iconSizes), actionIcon]}
+            onClick={handleAddContact}
+          />
         </Link>
-        <Search onClick={handlesearch}
-          css={[responsiveIcon(iconSizes), actionIcon]} />
-        <Edit2 css={[responsiveIcon(iconSizes), actionIcon]}
-          onClick={handleBulkEdit} />
+        <Search
+          onClick={handlesearch}
+          css={[responsiveIcon(iconSizes), actionIcon]}
+        />
+        <Edit2
+          css={[responsiveIcon(iconSizes), actionIcon]}
+          onClick={handleBulkEdit}
+        />
       </ActionsRight>
 
       {/* searching */}
-    </header >
+      {isSearching && <input
+        type="text"
+        placeholder="Search"
+      />}
+
+    </header>
   )
 }
 
