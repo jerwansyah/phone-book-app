@@ -4,11 +4,12 @@
 // import Link from 'next/link'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { gql, useQuery } from '@apollo/client'
 
 import Header from './components/header'
 import ContactListItem from './components/contactListItem'
 import { mq } from './styles/mediaQueries'
-import { gql, useQuery } from '@apollo/client'
+import Pagination, { paginationPaddingOffset } from './components/pagination'
 
 
 const GET_CONTACT_LIST = gql`
@@ -67,7 +68,7 @@ export default function ContactListPage() {
               firstName={item.first_name}
               lastName={item.last_name}
               phones={item.phones.map(phone => phone.number)}
-            ></ContactListItem>
+            />
           ))
         }
       </>
@@ -77,13 +78,17 @@ export default function ContactListPage() {
   return (
     <>
       <Header />
-      <main className='container'>
+      <main
+        className='container'
+        css={css`${paginationPaddingOffset}`}
+      >
         <ContactListContainer>
           <h4>Favorite(s)</h4>
           <hr />
           <ContactList />
         </ContactListContainer>
       </main>
+      <Pagination />
     </>
   )
 }

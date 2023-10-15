@@ -1,10 +1,8 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
-
 import React, { FC } from 'react'
 import styled from '@emotion/styled'
-// import { , smallColWidth } from './../styles/gridView'
 import User from './../svg/user.svg'
 import { mq } from '../styles/mediaQueries'
 
@@ -102,10 +100,9 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
         <ProfileDetails>
           <h4>{props.firstName} {props.lastName}</h4>
 
-          {/* TODO: set max 3 */}
           <div>
             {
-              props.phones.map((number, i) => [
+              props.phones.slice(0, 2).map((number, i) => [
                 i > 0 && ', ',
                 <span
                   className='text-body-2'
@@ -115,6 +112,7 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
                 </span>
               ])
             }
+            {props.phones.length > 2 && ', + more'}
           </div>
         </ProfileDetails>
       </Item>
