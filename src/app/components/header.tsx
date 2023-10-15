@@ -14,7 +14,7 @@ import { shadow4px } from '../styles/shadows'
 import { mq } from '../styles/mediaQueries'
 import { actionIcon, responsiveIcon } from '../styles/icon'
 
-interface Header {
+interface HeaderProps {
 
 }
 
@@ -46,7 +46,7 @@ const ActionsRight = styled.div({
 
 const iconSizes = ['24px', '32px']
 
-const Header: FC<Header> = () => {
+const Header: FC<HeaderProps> = () => {
   const [isSearching, setIsSearching] = useState(false)
 
   // user event

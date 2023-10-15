@@ -1,7 +1,7 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
-export default function ContactDetails() {
+export default function ContactDetailsPage() {
   return (
     <>
       <main>

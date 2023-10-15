@@ -88,8 +88,8 @@ export const global = css`
     }
 
     h4 {
-      font-size: 14px;
-      line-height: 20px;
+      font-size: 20px;
+      line-height: 28px;
     }
   }
 
@@ -160,6 +160,15 @@ export const global = css`
   .text-field-2 {
     font-size: 12px;
     line-height: 16px;
+  }
+
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgb(var(--neutral-gray-blue, #8993A0));
+    margin: 0;
+    padding: 0;
   }
 `
 
