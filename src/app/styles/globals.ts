@@ -170,5 +170,22 @@ export const global = css`
     margin: 0;
     padding: 0;
   }
+
+  .container {
+    display: flex;
+    width: 100vw;
+    padding: 16px 24px;
+    alignItems: center;
+    margin: 0 auto;
+
+    @media screen and (min-width: 576px) {
+      padding: 24px;
+      max-width: 856px;
+    }
+  }
+
+  .flex-col {
+    flex-direction: column;
+  }
 `
 

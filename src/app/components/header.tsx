@@ -19,13 +19,12 @@ interface HeaderProps {
 }
 
 const headerStyle = css({
-  display: 'flex',
-  width: '100%',
   position : 'sticky',
   top: '0',
   padding: '20px 24px',
   alignItems: 'center',
   height: '64px',
+
   [mq[0]]: {
     height: '76px'
   }
@@ -69,61 +68,69 @@ const Header: FC<HeaderProps> = () => {
   }
 
   return (
-    <header css={[shadow4px, headerStyle]}>
-      {
-        !isSearching &&
-        <>
-          <h3>Contact List</h3>
-          <ActionsRight nCol="3">
-            <Link href="/contact-details">
-              <Plus
-                css={[responsiveIcon(iconSizes), actionIcon]}
-                onClick={handleAddContact}
-              />
-            </Link>
-            <Search
-              onClick={handleSearch}
-              css={[responsiveIcon(iconSizes), actionIcon]}
-            />
-            <Edit2
-              css={[responsiveIcon(iconSizes), actionIcon]}
-              onClick={handleBulkEdit}
-            />
-          </ActionsRight>
-        </>
-      }
+    <>
+      <div
+        css={shadow4px}
+      >
+        <header
+          className='container'
+          css={headerStyle}
+        >
+          {
+            !isSearching &&
+            <>
+              <h3>Contact List</h3>
+              <ActionsRight nCol="3">
+                <Link href="/contact-details">
+                  <Plus
+                    css={[responsiveIcon(iconSizes), actionIcon]}
+                    onClick={handleAddContact}
+                  />
+                </Link>
+                <Search
+                  onClick={handleSearch}
+                  css={[responsiveIcon(iconSizes), actionIcon]}
+                />
+                <Edit2
+                  css={[responsiveIcon(iconSizes), actionIcon]}
+                  onClick={handleBulkEdit}
+                />
+              </ActionsRight>
+            </>
+          }
 
-      {/* searching */}
-      {
-        isSearching &&
-        <>
-          <ArrowLeft
-            css={
-              [responsiveIcon(iconSizes), actionIcon, {
-                marginRight: '10px',
-                [mq[0]]: {
-                  marginRight: '12px'
+          {/* searching */}
+          {
+            isSearching &&
+            <>
+              <ArrowLeft
+                css={
+                  [responsiveIcon(iconSizes), actionIcon, {
+                    marginRight: '10px',
+                    [mq[0]]: {
+                      marginRight: '12px'
+                    }
+                  }]
                 }
-              }]
-            }
-            onClick={handleSearch}
-          />
-          <input
-            type="search"
-            placeholder="Search"
-            className='form-input'
-            css={
-              css`
+                onClick={handleSearch}
+              />
+              <input
+                type="search"
+                placeholder="Search"
+                className='form-input'
+                css={
+                  css`
               width: 100%;
               padding-left: 0;
               padding-right: 0;
               `
-            }
-          />
-        </>
-      }
-
-    </header>
+                }
+              />
+            </>
+          }
+        </header>
+      </div>
+    </>
   )
 }
 
