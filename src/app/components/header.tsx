@@ -11,7 +11,7 @@ import Search from './../svg/search.svg'
 import Edit2 from './../svg/edit-2.svg'
 import ArrowLeft from './../svg/arrow-left.svg'
 import { shadow4px } from '../styles/shadows'
-import { mq } from '../styles/mediaQueries'
+import { mq } from './../styles/mediaQueries'
 import { actionIcon, responsiveIcon } from '../styles/icon'
 
 interface HeaderProps {
@@ -19,8 +19,6 @@ interface HeaderProps {
 }
 
 const headerStyle = css({
-  position : 'sticky',
-  top: '0',
   padding: '20px 24px',
   alignItems: 'center',
   height: '64px',
@@ -70,7 +68,7 @@ const Header: FC<HeaderProps> = () => {
   return (
     <>
       <div
-        css={shadow4px}
+        css={[shadow4px, css({ position : 'sticky', top: '0', width: '100%' })]}
       >
         <header
           className='container'
@@ -120,10 +118,10 @@ const Header: FC<HeaderProps> = () => {
                 className='form-input'
                 css={
                   css`
-              width: 100%;
-              padding-left: 0;
-              padding-right: 0;
-              `
+                    width: 100%;
+                    padding-left: 0;
+                    padding-right: 0;
+                    `
                 }
               />
             </>
