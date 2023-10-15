@@ -7,7 +7,6 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function GlobalStyles() {
-  console.log(inter.style.fontFamily)
   return (
     <>
       <style jsx global>{`
