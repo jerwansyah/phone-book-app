@@ -1,13 +1,13 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
-// import Link from 'next/link'
+import Link from 'next/link'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { gql, useQuery } from '@apollo/client'
 import { useState } from 'react'
 
-import Header from './components/header'
+import HeaderContactList from './components/headerContactList'
 import ContactListItem from './components/contactListItem'
 import { mq } from './styles/mediaQueries'
 import Pagination, { paginationPaddingOffset } from './components/pagination'
@@ -104,12 +104,17 @@ export default function ContactListPage() {
         {
           (data && data.contact) &&
           data.contact.map((item, i) => (
-            <ContactListItem
+            <Link
+              href={`/${item.id}`}
               key={item.id}
-              firstName={item.first_name}
-              lastName={item.last_name}
-              phones={item.phones.map(phone => phone.number)}
-            />
+            >
+              <ContactListItem
+                // key={item.id}
+                firstName={item.first_name}
+                lastName={item.last_name}
+                phones={item.phones.map(phone => phone.number)}
+              />
+            </Link>
           ))
         }
         {
@@ -122,7 +127,7 @@ export default function ContactListPage() {
 
   return (
     <>
-      <Header />
+      <HeaderContactList />
       <main
         className='container'
         css={css`${paginationPaddingOffset}`}

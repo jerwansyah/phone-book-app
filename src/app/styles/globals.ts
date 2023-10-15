@@ -6,6 +6,7 @@ export const global = css`
   :root {
     --neutral-black: 33, 33, 33;
     --neutral-gray: 113, 113, 113;
+    --neutral-gray-dark: 77, 77, 77;
     --neutral-gray-light: 137, 147, 158;
     --neutral-gray-blue: 171, 190, 209;
     --neutral-silver: 245, 247, 250;

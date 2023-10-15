@@ -3,9 +3,8 @@
 
 import React, { FC } from 'react'
 import styled from '@emotion/styled'
-import User from './../svg/user.svg'
-import { mq } from '../styles/mediaQueries'
-
+import { mq } from './../styles/mediaQueries'
+import ContactIcon from './contactIcon'
 
 interface ContactListItemProps {
   firstName: string;
@@ -20,38 +19,6 @@ const Item = styled.div({
 
   [mq[0]]: {
     gap: '24px'
-  }
-})
-
-const ProfileIcon = styled.div({
-  width: '44px',
-  height: '44px',
-  backgroundColor: 'rgb(var(--primary-blue-light))',
-  borderRadius: '50%',
-  border: '1px solid rgb(var(--primary-blue-medium))',
-  display : 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: 'rgb(var(--primary-blue-medium))',
-  aspectRatio: '1/1',
-
-  svg: {
-    width: '24px',
-    height: '24px',
-    '*': {
-      stroke: 'rgb(var(--primary-blue-medium))'
-    }
-  },
-
-  [mq[0]]: {
-    width: '80px',
-    height: '80px',
-    border: '2px solid rgb(var(--primary-blue-medium))',
-
-    svg: {
-      width: '32px',
-      height: '32px'
-    }
   }
 })
 
@@ -93,9 +60,7 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
   return (
     <>
       <Item>
-        <ProfileIcon>
-          <User />
-        </ProfileIcon>
+        <ContactIcon />
         <ProfileDetails>
           <h4>{props.firstName} {props.lastName}</h4>
 

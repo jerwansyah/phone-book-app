@@ -21,7 +21,7 @@ export const resets = css`
   button,
   select,
   textarea {
-    font-family: var(--font-family, 'Inter', sans-serif);
+    // font-family: var(--font-family, 'Inter');
   }
 
   ::-moz-selection {

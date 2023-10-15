@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+// import { Inter } from 'next/font/google'
 
 import Client from './client'
 import GlobalStyles from './registry'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Phonebook App',
@@ -23,7 +23,7 @@ export default function RootLayout({
         <html lang="en">
           <body
             suppressHydrationWarning
-            className={inter.className}
+            // className={inter.className}
           >
             {children}
           </body>
