@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+
+import Client from './client'
 import GlobalStyles from './registry'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -16,15 +18,17 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <GlobalStyles />
-      <html lang="en">
-        <body
-          suppressContentEditableWarning
-          className={inter.className}
-        >
-          {children}
-        </body>
-      </html>
+      <Client>
+        <GlobalStyles />
+        <html lang="en">
+          <body
+            suppressHydrationWarning
+            className={inter.className}
+          >
+            {children}
+          </body>
+        </html>
+      </Client>
     </>
   )
 }

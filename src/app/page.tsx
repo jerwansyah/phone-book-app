@@ -8,8 +8,36 @@ import styled from '@emotion/styled'
 import Header from './components/header'
 import ContactListItem from './components/contactListItem'
 import { mq } from './styles/mediaQueries'
+import { gql, useQuery } from '@apollo/client'
 
-const ContactList = styled.div({
+
+const GET_CONTACT_LIST = gql`
+query GetContactList (
+  $distinct_on: [contact_select_column!],
+  $limit: Int,
+  $offset: Int,
+  $order_by: [contact_order_by!],
+  $where: contact_bool_exp
+) {
+  contact(
+      distinct_on: $distinct_on,
+      limit: $limit,
+      offset: $offset,
+      order_by: $order_by,
+      where: $where
+  ) {
+    created_at
+    first_name
+    id
+    last_name
+    phones {
+      number
+    }
+  }
+}
+`
+
+const ContactListContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
@@ -20,54 +48,41 @@ const ContactList = styled.div({
   }
 })
 
-const DummyContactList = [
-  {
-    firstName: 'Johnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn',
-    lastName: 'Doe',
-    phones: ['12354', '12354', '100000000000000000000000000002354']
-  },
-  {
-    firstName: 'n',
-    lastName: 'Doe',
-    phones: ['123']
-  },
-  {
-    firstName: 'John',
-    lastName: 'Doe',
-    phones: ['123']
-  }
-]
-
 export default function ContactListPage() {
+  function ContactList() {
+    const {loading, error, data} = useQuery(GET_CONTACT_LIST)
+    // TODO: add spinner
+    if (loading) return <p>Loading ...</p>
+    if (error) return `Error! ${error}`
+
+    // TODO: separate list of favorite contacts
+    // TODO: save in local storage
+    // TODO: pagination
+    return (
+      <>
+        {
+          data.contact.map((item, i) => (
+            <ContactListItem
+              key={item.id}
+              firstName={item.first_name}
+              lastName={item.last_name}
+              phones={item.phones.map(phone => phone.number)}
+            ></ContactListItem>
+          ))
+        }
+      </>
+    )
+  }
+
   return (
     <>
       <Header />
       <main className='container'>
-        {/* <main css={mainStyle}> */}
-        <ContactList>
+        <ContactListContainer>
           <h4>Favorite(s)</h4>
-          {
-            DummyContactList.map((contact, index) => (
-              <ContactListItem
-                key={index}
-                firstName={contact.firstName}
-                lastName={contact.lastName}
-                phones={contact.phones}
-              />
-            ))
-          }
           <hr />
-          {
-            DummyContactList.map((contact, index) => (
-              <ContactListItem
-                key={index}
-                firstName={contact.firstName}
-                lastName={contact.lastName}
-                phones={contact.phones}
-              />
-            ))
-          }
-        </ContactList>
+          <ContactList />
+        </ContactListContainer>
       </main>
     </>
   )
