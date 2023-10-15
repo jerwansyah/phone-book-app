@@ -3,8 +3,6 @@
 
 import React, { FC } from 'react'
 import { css } from '@emotion/react'
-// import styled from '@emotion/styled'
-// import Link from 'next/link'
 
 import ArrowLeft from './../svg/arrow-left.svg'
 import ArrowRight from './../svg/arrow-right.svg'
@@ -12,7 +10,10 @@ import { shadowNegative4px } from './../styles/shadows'
 import { mq } from './../styles/mediaQueries'
 
 interface PaginationProps {
-
+  currentPage?: number,
+  // maxPage?: number,
+  next: () => void,
+  prev: () => void,
 }
 
 const paginationContainer = css({
@@ -23,8 +24,33 @@ const paginationContainer = css({
   button: {
     height: '32px',
     border: 'none',
-    backgroundColor: 'rgb(var(--neutral-white))'
+    backgroundColor: 'rgb(var(--neutral-white))',
+
+    ':hover': {
+      cursor: 'pointer'
+    }
   }
+})
+
+const svgStyle = css({
+  width: '16px',
+  height: '16px',
+  margin: '8px',
+  path: {
+    stroke: 'rgb(var(--neutral-black))'
+  }
+})
+
+const buttonStyle = css({
+  color: 'rgb(var(--neutral-white))',
+  display: 'flex',
+  width: '32px',
+  height: '32px',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '4px',
+  background: 'var(--primary-blue-medium, #0671E0)'
 })
 
 export const paginationPaddingOffset = css({
@@ -35,7 +61,7 @@ export const paginationPaddingOffset = css({
   }
 })
 
-const Pagination: FC<PaginationProps> = () => {
+const Pagination: FC<PaginationProps> = (props) => {
   return (
     <>
       <div
@@ -55,24 +81,18 @@ const Pagination: FC<PaginationProps> = () => {
           className="container"
           css={paginationContainer}
         >
-          <button css={css`margin-right: 12px;`}>
-            <ArrowLeft
-              css={css`margin: 8px;`}
-              width='16px'
-              height='16px'
-            />
+          <button
+            css={css`margin-right: 12px;`}
+            onClick={props.prev}
+          >
+            <ArrowLeft css={svgStyle} />
           </button>
-
-          {/* <Pages>
-
-          </Pages> */}
-
-          <button css={css`margin-left: 12px;`}>
-            <ArrowRight
-              css={css`margin: 8px;`}
-              width='16px'
-              height='16px'
-            />
+          <button css={buttonStyle}>{props.currentPage}</button>
+          <button
+            css={css`margin-left: 12px;`}
+            onClick={props.next}
+          >
+            <ArrowRight css={svgStyle} />
           </button>
         </div>
       </div>

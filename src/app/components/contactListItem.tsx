@@ -90,7 +90,6 @@ const ProfileDetails = styled.div({
 })
 
 const ContactListItem: FC<ContactListItemProps> = (props) => {
-
   return (
     <>
       <Item>
