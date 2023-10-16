@@ -51,8 +51,26 @@ const ContactListContainer = styled.div({
 
 const limit = 10
 
+const queryHelper = (query: string) => {
+  return {
+    "_or": [
+      { "first_name": { "_like": `%${query}%` } },
+      { "last_name": { "_like": `%${query}%` } },
+      { "phones": { "number": { "_like": `%${query}%` } } }
+    ]
+  }
+}
+
 export default function ContactListPage() {
   const [offset, setOffset] = useState(0)
+  const [query, setQuery] = useState('')
+  const [isSearching, setIsSearching] = useState(false)
+
+  const handleSearch = (e) => {
+    console.log(e.target.value)
+    setOffset(0)
+    setQuery(e.target.value)
+  }
 
   // TODO: limit next page if no more result
   const goToNextPage = () => {
@@ -72,7 +90,7 @@ export default function ContactListPage() {
       fetchMore({
         variables: {
           offset: offset,
-          limit: limit
+          limit: limit,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if ([...fetchMoreResult.contact].length === 0) {
@@ -88,7 +106,12 @@ export default function ContactListPage() {
     const { loading, error, data, fetchMore } = useQuery(GET_CONTACT_LIST, {
       variables: {
         offset: offset,
-        limit: limit
+        limit: limit,
+        where: queryHelper(query),
+        order_by: [
+          { "first_name": "asc" },
+          { "last_name": "asc" }
+        ]
       }
     })
 
@@ -125,17 +148,26 @@ export default function ContactListPage() {
     )
   }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
   return (
     <>
-      <HeaderContactList />
+      <HeaderContactList
+        onSearch={handleSearch}
+        controlSearch={setIsSearching}
+        isSearching={isSearching}/>
       <main
         className='container'
         css={css`${paginationPaddingOffset}`}
       >
         <ContactListContainer>
-          <h4>Favorite(s)</h4>
+          {!isSearching &&
+            <>
+              <h4>Favorite(s)</h4>
+              <hr />
+            </>
+          }
           {/* TODO: local storage, filter pagination with where */}
-          <hr />
           <ContactList />
         </ContactListContainer>
       </main>

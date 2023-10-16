@@ -15,7 +15,9 @@ import { mq } from '../styles/mediaQueries'
 import { actionIcon, responsiveIcon } from '../styles/icon'
 
 interface HeaderProps {
-
+  onSearch: () => void,
+  controlSearch: () => void,
+  isSearching: boolean
 }
 
 const headerStyle = css({
@@ -43,18 +45,9 @@ const ActionsRight = styled.div({
 
 const iconSizes = ['24px', '32px']
 
-const Header: FC<HeaderProps> = () => {
-  const [isSearching, setIsSearching] = useState(false)
-
-  // user event
+const Header: FC<HeaderProps> = (props) => {
   const handleSearch = () => {
-    console.log('search')
-    // if out of focus, hide search bar
-    // // check focus
-    // if (document.activeElement !== document.body) {
-    //   console.log('not focused')
-    // }
-    setIsSearching(!isSearching)
+    props.controlSearch(!props.isSearching)
   }
 
   const handleBulkEdit = () => {
@@ -71,7 +64,7 @@ const Header: FC<HeaderProps> = () => {
           css={headerStyle}
         >
           {
-            !isSearching &&
+            !props.isSearching &&
             <>
               <h3>Contact List</h3>
               <ActionsRight>
@@ -94,7 +87,7 @@ const Header: FC<HeaderProps> = () => {
 
           {/* searching */}
           {
-            isSearching &&
+            props.isSearching &&
             <>
               <ArrowLeft
                 css={
@@ -118,6 +111,7 @@ const Header: FC<HeaderProps> = () => {
                     padding-right: 0;
                     `
                 }
+                onChange={props.onSearch}
               />
             </>
           }
