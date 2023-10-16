@@ -34,10 +34,12 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
       updatedPhones.splice(index, 1)
       setPhones(updatedPhones)
       setTotalPhone(totalPhone - 1)
+      props.setContactData({
+        ...props.contactData,
+        phones: updatedPhones
+      })
     }
   }
-
-  console.log('phones', phones)
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value)
