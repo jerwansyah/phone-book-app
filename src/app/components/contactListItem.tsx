@@ -2,11 +2,13 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { FC, useState } from 'react'
+
 import styled from '@emotion/styled'
 import { mq } from '../styles/mediaQueries'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import ContactIcon from './contactIcon'
 import { ContactListItemActions } from './contactListItemActions'
-import Link from 'next/link'
 import { useMutation } from '@apollo/client'
 import { DELETE_CONTACT_BY_ID } from '../lib/deleteContactById'
 
@@ -62,6 +64,7 @@ const ProfileDetails = styled.div({
 })
 
 const ContactListItem: FC<ContactListItemProps> = (props) => {
+  const router = useRouter()
   const [isHovered, setIsHovered] = useState(false)
   // const [isHolding, setHolding] = useState(false)
 
@@ -103,7 +106,8 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
     try {
       const result = await deleteContact({ variables: { id: props.contactId } })
         if (result?.data?.delete_contact_by_pk) {
-          console.log('deleted')
+          router.push('/?deleted=true')
+          // TODO: change it!!!
         }
     } catch (e) {
       console.error(`Error deleting contact: ${e}`)

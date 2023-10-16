@@ -1,6 +1,8 @@
 'use client'
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -38,6 +40,13 @@ export default function Client({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    client.resetStore()
+  }, [pathname, searchParams])
+
   return (
     <>
       <ApolloProvider client={client}>
