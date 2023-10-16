@@ -59,7 +59,12 @@ const Header: FC<HeaderProps> = (props) => {
   return (
     <>
       <div
-        css={[shadow4px, css({ position : 'sticky', top: '0', width: '100%' })]}
+        css={
+          [
+            shadow4px,
+            css({ position : 'fixed', top: '0', width: '100%', zIndex: '99' })
+          ]
+        }
       >
         <header
           className='container'

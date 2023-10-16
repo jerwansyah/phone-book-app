@@ -60,6 +60,14 @@ const queryHelper = (query: string) => {
   }
 }
 
+const headerOffset = css({
+  marginTop: '64px',
+
+  [mq[0]]: {
+    marginTop: '76px'
+  }
+})
+
 export default function ContactListPage() {
   const [offset, setOffset] = useState(0)
   const [query, setQuery] = useState('')
@@ -160,7 +168,10 @@ export default function ContactListPage() {
         isSearching={isSearching}/>
       <main
         className='container'
-        css={css`${paginationPaddingOffset}`}
+        css={css`
+          ${paginationPaddingOffset}
+          ${headerOffset}
+        `}
       >
         <ContactListContainer>
           {!isSearching &&

@@ -145,7 +145,6 @@ export default function AddContactPage() {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             setContactData={setContactData}
-            css={css`: center;`}
           />
         </div>
       </main>
