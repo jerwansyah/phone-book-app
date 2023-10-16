@@ -25,8 +25,7 @@ const nextConfig = {
 
     return config
   },
-  distDir: 'build',
-  pageExtensions: ['page.jsx', 'page.tsx']
+  pageExtensions: ['jsx', 'tsx']
 }
 
 module.exports = nextConfig
