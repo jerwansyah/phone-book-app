@@ -7,6 +7,8 @@ import { mq } from '../styles/mediaQueries'
 import ContactIcon from './contactIcon'
 import { ContactListItemActions } from './contactListItemActions'
 import Link from 'next/link'
+import { useMutation } from '@apollo/client'
+import { DELETE_CONTACT_BY_ID } from '../lib/deleteContactById'
 
 interface ContactListItemProps {
   contactId: string;
@@ -61,6 +63,23 @@ const ProfileDetails = styled.div({
 
 const ContactListItem: FC<ContactListItemProps> = (props) => {
   const [isHovered, setIsHovered] = useState(false)
+  // const [isHolding, setHolding] = useState(false)
+
+  // let holdTimeout
+
+  // const handleTouchStart = () => {
+  //   holdTimeout = setTimeout(() => {
+  //     setHolding(true)
+  //   }, 1000)
+  // };
+
+  // const handleTouchEnd = () => {
+  //   clearTimeout(holdTimeout)
+
+  //   if (isHolding) {
+  //     setHolding(false);
+  //   }
+  // }
 
   const handleMouseEnter = () => {
     setIsHovered(true)
@@ -70,17 +89,44 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
     setIsHovered(false)
   }
 
-  const handleDelete = () => {
+  const handleEdit = () => {
+    console.log('edit')
+  }
+
+  const [deleteContact, { loading, error, data }] = useMutation(DELETE_CONTACT_BY_ID, {
+    variables: { id: props.contactId }
+  })
+
+  const handleDelete = async () => {
     console.log('delete', props.contactId)
+
+    try {
+      const result = await deleteContact({ variables: { id: props.contactId } })
+        if (result?.data?.delete_contact_by_pk) {
+          console.log('deleted')
+        }
+    } catch (e) {
+      console.error(`Error deleting contact: ${e}`)
+    }
+  }
+
+  const handleFavorite = () => {
+    console.log('favorite')
   }
 
   return (
-    <>
+    <div
+      css={{
+        // position: 'relative'
+      }}
+    >
       <Link href={`/${props.contactId}`}>
         <Item
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          >
+          // onTouchStart={handleTouchStart}
+          // onTouchEnd={handleTouchEnd}
+        >
           <ContactIcon />
           <ProfileDetails>
             <h4>{props.firstName} {props.lastName}</h4>
@@ -102,22 +148,22 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
           </ProfileDetails>
         </Item>
       </Link>
+      {/* { isHovered || isHolding && */}
       {/* { isHovered && */}
         <ContactListItemActions
           css={{
-            // position: 'absolute',
-            marginLeft: 'auto',
+            position: 'relative',
+            marginTop: '-26px',
+            // zIndex: 1,
             // right: '0',
             // top: '0',
-            // height: '100%',
-            // width: '80px',
           }}
-          edit={handleDelete}
-          delete={() => console.log('delete')}
-          favorite={() => console.log('favorite')}
+          edit={handleEdit}
+          delete={handleDelete}
+          favorite={handleFavorite}
         />
       {/* } */}
-    </>
+    </div>
   )
 }
 

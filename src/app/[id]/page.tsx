@@ -3,7 +3,9 @@
 
 import Link from 'next/link'
 import { css } from '@emotion/react'
-import { gql, useQuery } from '@apollo/client'
+import { useRouter } from 'next/navigation'
+import { gql, useQuery, useMutation } from '@apollo/client'
+import { DELETE_CONTACT_BY_ID } from '../lib/deleteContactById'
 
 import ArrowLeft from '../svg/arrow-left.svg'
 import Edit1 from '../svg/edit-1.svg'
@@ -37,6 +39,22 @@ query GetContactDetail($id: Int!) {
 export default function ContactDetailPage({
   params
 }: { params: { id: string } }) {
+  const router = useRouter()
+  const [deleteContact, { loading, error, data }] = useMutation(DELETE_CONTACT_BY_ID, {
+    variables: { id: params.id }
+  })
+
+  const handleDelete = async () => {
+    try {
+      const result = await deleteContact({ variables: { id: params.id } })
+        if (result?.data?.delete_contact_by_pk) {
+          router.push('/')
+        }
+    } catch (e) {
+      console.error(`Error deleting contact: ${e}`)
+    }
+  }
+
   function GetContactDetail() {
     const { loading, error, data } = useQuery(GET_CONTACT_DETAIL, {
       variables: { id: params.id }
@@ -86,6 +104,7 @@ export default function ContactDetailPage({
                   })
                 ]
               }
+              onClick={handleDelete}
             />
           </>
         }
