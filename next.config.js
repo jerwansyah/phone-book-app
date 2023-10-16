@@ -25,6 +25,7 @@ const nextConfig = {
 
     return config
   },
+  distDir: 'build',
   pageExtensions: ['page.jsx', 'page.tsx']
 }
 
