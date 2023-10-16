@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { resets } from './resets'
 import { forms } from './forms'
+import { buttons } from './buttons'
 
 export const global = css`
   :root {
@@ -188,5 +189,7 @@ export const global = css`
   .flex-col {
     flex-direction: column;
   }
+
+  ${buttons}
 `
 

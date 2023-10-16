@@ -15,8 +15,8 @@ import Close from './../svg/close.svg'
 
 import Header from './../components/header'
 import { actionIcon, responsiveIcon } from '../styles/icon'
-import ProfileIcon from './../svg/profile-icon.svg'
 import { mq } from '../styles/mediaQueries'
+import ProfileIcon from './../svg/profile-icon.svg'
 import ContactDetail from '../components/contactDetail'
 
 const iconSizes = ['24px', '32px']

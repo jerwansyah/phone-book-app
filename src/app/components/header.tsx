@@ -59,6 +59,7 @@ const Header = (props) => {
           <Actions
             isLeft
             className='left'
+            css={css`${props.textCenter ? 'margin-right: auto !important;' : ''}`}
           >
             {props.left}
           </Actions>

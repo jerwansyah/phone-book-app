@@ -47,10 +47,6 @@ const Header: FC<HeaderProps> = () => {
   const [isSearching, setIsSearching] = useState(false)
 
   // user event
-  const handleAddContact = () => {
-    console.log('add contact')
-  }
-
   const handleSearch = () => {
     console.log('search')
     // if out of focus, hide search bar
@@ -79,10 +75,9 @@ const Header: FC<HeaderProps> = () => {
             <>
               <h3>Contact List</h3>
               <ActionsRight>
-                <Link href="/contact-details">
+                <Link href="/add-contact">
                   <Plus
                     css={[responsiveIcon(iconSizes), actionIcon]}
-                    onClick={handleAddContact}
                   />
                 </Link>
                 <Search

@@ -1,22 +1,58 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
-import React, { FC, useRef } from 'react'
-import { css } from '@emotion/react'
+import React, { FC, useState } from 'react'
 import { mq } from '../styles/mediaQueries'
 import InputWrapper from './inputWrapper'
 
 interface ContactDetailProps {
+  isEditing?: boolean;
   contactData: { [key: string]: any };
-  isEditing: boolean;
+  setContactData: void;
 }
 
 const ContactDetail: FC<ContactDetailProps> = (props) => {
-  // const [isEditing, setIsEditing] = useState(false)
+  const [firstName, setFirstName] = useState(props.contactData.first_name)
+  const [lastName, setLastName] = useState(props.contactData.last_name)
+  const [phones, setPhones] = useState(props.contactData.phones)
 
-  const firstName = useRef(props.contactData.first_name)
-  const lastName = useRef(props.contactData.last_name)
-  const phones = useRef(props.contactData.phones.map(phone => phone.number))
+  const [totalPhone, setTotalPhone] = useState(phones.length)
+
+  // TODO: add validator for phone
+
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value)
+    props.setContactData({
+      ...props.contactData,
+      first_name: e.target.value
+    })
+  }
+
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value)
+    props.setContactData({
+      ...props.contactData,
+      last_name: e.target.value
+    })
+  }
+
+  const handlePhoneChange = (index, e) => {
+    const updatedPhones = [...phones]
+    updatedPhones[index] = {
+      number: e.target.value
+    }
+
+    setPhones(updatedPhones)
+    props.setContactData({
+      ...props.contactData,
+      phones: updatedPhones
+    })
+  }
+
+  const addNumberInput = () => {
+    setTotalPhone(totalPhone + 1)
+    setPhones([...phones, { number: '' }])
+  }
 
   return (
     <>
@@ -41,7 +77,8 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
             type='text'
             placeholder='First Name'
             className='form-input slot'
-            value={firstName.current}
+            value={firstName}
+            onChange={(e) => handleFirstNameChange(e)}
             disabled={!props.isEditing}
             />
         </InputWrapper>
@@ -55,11 +92,12 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
             type='text'
             placeholder='Last Name'
             className='form-input slot'
-            value={lastName.current}
+            value={lastName}
+            onChange={handleLastNameChange}
             disabled={!props.isEditing}
             />
         </InputWrapper>
-        {phones.current.map((number, i) => [
+        {phones?.map((phone, i) => [
           <InputWrapper
             label={`Number ${i + 1}`}
             for="number"
@@ -72,13 +110,20 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
               type='text'
               placeholder='Phone Number'
               className='form-input slot'
-              onChange={() => {console.log('dasdsa')}}
+              onChange={(e) => handlePhoneChange(i, e)}
               disabled={!props.isEditing}
-              value={number}
+              value={phone.number}
             />
           </InputWrapper>
         ])}
-        {props.isEditing && <button>Add Number +</button>}
+        {props.isEditing &&
+          <button
+            className="btn-tertiary"
+            onClick={addNumberInput}
+          >
+            Add Number +
+          </button>
+        }
       </div>
     </>
   )
