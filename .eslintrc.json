@@ -21,7 +21,7 @@
   "plugins": ["react", "@typescript-eslint"],
 
   "rules": {
-    // "react/jsx-boolean-value": "always",
+    "react/jsx-boolean-value": ["warn"],
     "indent": ["warn", 2],
     "quotes": ["warn", "single"],
     "no-console": "warn",

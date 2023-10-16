@@ -11,7 +11,11 @@ const cache = new InMemoryCache({
             args: {
               // Default to returning the entire cached list,
               // if offset and limit are not provided.
-              offset = 0,
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              offset = existing?.offset || 0,
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               limit = existing?.length || 10
             } = {}
           }) {

@@ -1,7 +1,7 @@
 'use client'
 
 import { Global } from '@emotion/react'
-import { global } from './styles/globals'
+import { global } from '../styles/globals'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })

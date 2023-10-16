@@ -7,13 +7,13 @@ import Link from 'next/link'
 import { css } from '@emotion/react'
 import { gql, useMutation } from '@apollo/client'
 
-import Header from './../components/header'
-import Check from './../svg/check.svg'
-import Close from './../svg/close.svg'
+import Header from '../components/header'
+import Check from '../svg/check.svg'
+import Close from '../svg/close.svg'
 import { actionIcon, responsiveIcon } from '../styles/icon'
 import { mq } from '../styles/mediaQueries'
 import ContactDetail from '../components/contactDetail'
-import ProfileIcon from './../svg/profile-icon.svg'
+import ProfileIcon from '../svg/profile-icon.svg'
 
 const iconSizes = ['24px', '32px']
 
@@ -142,6 +142,8 @@ export default function AddContactPage() {
           <ContactDetail
             isEditing={true}
             contactData={contactData}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             setContactData={setContactData}
             css={css`: center;`}
           />

@@ -25,6 +25,7 @@ const nextConfig = {
 
     return config
   },
+  pageExtensions: ['page.jsx', 'page.tsx']
 }
 
 module.exports = nextConfig

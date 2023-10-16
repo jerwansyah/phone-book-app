@@ -6,8 +6,8 @@ import { css } from '@emotion/react'
 
 import ArrowLeft from './../svg/arrow-left.svg'
 import ArrowRight from './../svg/arrow-right.svg'
-import { shadowNegative4px } from './../styles/shadows'
-import { mq } from './../styles/mediaQueries'
+import { shadowNegative4px } from '../styles/shadows'
+import { mq } from '../styles/mediaQueries'
 
 interface PaginationProps {
   currentPage?: number,

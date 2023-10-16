@@ -7,7 +7,7 @@ export const actionIcon = css({
   }
 })
 
-export const responsiveIcon = (sizes) => css`
+export const responsiveIcon = (sizes: Array<string>) => css`
   width: ${sizes[0]};
   height: ${sizes[0]};
 

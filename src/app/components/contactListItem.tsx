@@ -3,7 +3,7 @@
 
 import React, { FC } from 'react'
 import styled from '@emotion/styled'
-import { mq } from './../styles/mediaQueries'
+import { mq } from '../styles/mediaQueries'
 import ContactIcon from './contactIcon'
 
 interface ContactListItemProps {

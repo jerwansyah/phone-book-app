@@ -11,7 +11,7 @@ import { actionIcon } from '../styles/icon'
 interface ContactDetailProps {
   isEditing?: boolean;
   contactData: { [key: string]: any };
-  setContactData?: void;
+  setContactData?: () => void;
 }
 
 const ContactDetail: FC<ContactDetailProps> = (props) => {
@@ -23,17 +23,19 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
   // TODO: add validator for phone
 
   const addNumberInput = () => {
-    setTotalPhone((prevTotalPhone) => prevTotalPhone + 1)
-    setPhones((prevPhones) => [...prevPhones, { number: '' }])
+    setTotalPhone((prevTotalPhone: number) => prevTotalPhone + 1)
+    setPhones((prevPhones: any) => [...prevPhones, { number: '' }])
   }
 
-  const removeNumberInput = (e) => {
+  const removeNumberInput = (e: { target: { getAttribute: (arg0: string) => any } }) => {
     const index = e.target.getAttribute('data-index')
     if (totalPhone > 1) {
       const updatedPhones = [...phones]
       updatedPhones.splice(index, 1)
       setPhones(updatedPhones)
       setTotalPhone(totalPhone - 1)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       props.setContactData({
         ...props.contactData,
         phones: updatedPhones
@@ -41,29 +43,35 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
     }
   }
 
-  const handleFirstNameChange = (e) => {
+  const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstName(e.target.value)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     props.setContactData({
       ...props.contactData,
       first_name: e.target.value
     })
   }
 
-  const handleLastNameChange = (e) => {
+  const handleLastNameChange = (e: { target: { value: any } }) => {
     setLastName(e.target.value)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     props.setContactData({
       ...props.contactData,
       last_name: e.target.value
     })
   }
 
-  const handlePhoneChange = (index, e) => {
+  const handlePhoneChange = (index: number | number, e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedPhones = [...phones]
     updatedPhones[index] = {
       number: e.target.value
     }
 
     setPhones(updatedPhones)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     props.setContactData({
       ...props.contactData,
       phones: updatedPhones
@@ -114,10 +122,10 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
             disabled={!props.isEditing}
             />
         </InputWrapper>
-        {phones?.map((phone, i) => [
+        {phones?.map((phone: any, i: number) => [
           <InputWrapper
             label={`Number ${i + 1}`}
-            for={i}
+            for={`number${i}`}
             disabled={!props.isEditing}
             required
             suffix={

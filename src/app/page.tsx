@@ -103,16 +103,16 @@ export default function ContactListPage() {
       <>
         {
           (data && data.contact) &&
-          data.contact.map((item, i) => (
+          data.contact.map((item: any) => (
             <Link
               href={`/${item.id}`}
               key={item.id}
             >
               <ContactListItem
-                // key={item.id}
                 firstName={item.first_name}
                 lastName={item.last_name}
-                phones={item.phones.map(phone => phone.number)}
+                phones={item.phones.map(
+                  (phone: { number: string | number }) => phone.number)}
               />
             </Link>
           ))
