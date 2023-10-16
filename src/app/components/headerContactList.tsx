@@ -47,6 +47,8 @@ const iconSizes = ['24px', '32px']
 
 const Header: FC<HeaderProps> = (props) => {
   const handleSearch = () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     props.controlSearch(!props.isSearching)
   }
 

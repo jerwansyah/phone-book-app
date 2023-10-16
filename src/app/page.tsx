@@ -65,8 +65,7 @@ export default function ContactListPage() {
   const [query, setQuery] = useState('')
   const [isSearching, setIsSearching] = useState(false)
 
-  const handleSearch = (e) => {
-    console.log(e.target.value)
+  const handleSearch = (e: any) => {
     setOffset(0)
     setQuery(e.target.value)
   }
@@ -149,12 +148,14 @@ export default function ContactListPage() {
     )
   }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
   return (
     <>
       <HeaderContactList
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         onSearch={handleSearch}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         controlSearch={setIsSearching}
         isSearching={isSearching}/>
       <main
