@@ -4,15 +4,15 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import Link from 'next/link'
+// import Link from 'next/link'
 
-import Plus from './../svg/plus.svg'
-import Search from './../svg/search.svg'
-import Edit2 from './../svg/edit-2.svg'
-import ArrowLeft from './../svg/arrow-left.svg'
+// import Plus from './../svg/plus.svg'
+// import Search from './../svg/search.svg'
+// import Edit2 from './../svg/edit-2.svg'
+// import ArrowLeft from './../svg/arrow-left.svg'
 import { shadow4px } from '../styles/shadows'
 import { mq } from '../styles/mediaQueries'
-import { actionIcon, responsiveIcon } from '../styles/icon'
+// import { actionIcon, responsiveIcon } from '../styles/icon'
 
 const headerStyle = css({
   padding: '20px 24px',
@@ -44,7 +44,7 @@ const Actions = styled.div(props => ({
   // }
 }))
 
-const iconSizes = ['24px', '32px']
+// const iconSizes = ['24px', '32px']
 
 const Header = (props) => {
   return (

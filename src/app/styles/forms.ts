@@ -69,6 +69,6 @@ export const forms = css`
     z-index: 1;
     position: relative;
     padding: 12px 20px 0 21px;
-    pointer-events:none;
+    pointer-events: none;
   }
 `

@@ -10,8 +10,8 @@ import Edit1 from './../svg/edit-1.svg'
 import Heart from './../svg/heart.svg'
 // import HeartFilled from './../svg/heart-filled.svg'
 import Trash from './../svg/trash.svg'
-import Check from './../svg/check.svg'
-import Close from './../svg/close.svg'
+// import Check from './../svg/check.svg'
+// import Close from './../svg/close.svg'
 
 import Header from './../components/header'
 import { actionIcon, responsiveIcon } from '../styles/icon'
@@ -67,11 +67,10 @@ export default function ContactDetailPage({
         }
         right={
           <>
-            <Link href="/contact-details">
-              <Edit1
-                css={[responsiveIcon(iconSizes), actionIcon]}
-              />
-            </Link>
+            <Edit1
+              css={[responsiveIcon(iconSizes), actionIcon]}
+              onClick={() => console.log('edit')}
+            />
             <Heart
               css={[responsiveIcon(iconSizes), actionIcon]}
             />
@@ -104,8 +103,7 @@ export default function ContactDetailPage({
 
             [mq[0]]: {
               alignItems: 'flex-start',
-              flexDirection: 'row',
-              // gap: '24px'
+              flexDirection: 'row'
             }
           }
         }

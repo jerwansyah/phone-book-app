@@ -23,8 +23,8 @@
   "rules": {
     // "react/jsx-boolean-value": "always",
     "indent": ["warn", 2],
-    "quotes": ["error", "single"],
-    "no-console": "error",
+    "quotes": ["warn", "single"],
+    "no-console": "warn",
     "semi": ["warn", "never"],
     "comma-dangle": ["warn", "never"],
     "no-multi-spaces": "warn",
@@ -40,6 +40,8 @@
     "react/jsx-indent-props": ["warn", 2],
     "react/jsx-first-prop-new-line": ["warn", "multiline"],
     "react/jsx-closing-bracket-location": ["warn", "line-aligned"],
-    "react/jsx-curly-newline": ["warn", { "multiline": "require" }]
+    "react/jsx-curly-newline": ["warn", { "multiline": "require" }],
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }

@@ -5,6 +5,8 @@ import React, { FC, useState } from 'react'
 import { mq } from '../styles/mediaQueries'
 import InputWrapper from './inputWrapper'
 import Plus from './../svg/plus.svg'
+import Minus from './../svg/minus.svg'
+import { actionIcon } from '../styles/icon'
 
 interface ContactDetailProps {
   isEditing?: boolean;
@@ -18,8 +20,22 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
   const [phones, setPhones] = useState(props.contactData.phones)
 
   const [totalPhone, setTotalPhone] = useState(phones.length)
-
+  console.log('totalPhone', totalPhone)
   // TODO: add validator for phone
+
+  const addNumberInput = () => {
+    setTotalPhone((prevTotalPhone) => prevTotalPhone + 1)
+    setPhones((prevPhones) => [...prevPhones, { number: '' }])
+  }
+
+  const removeNumberInput = (index) => {
+    if (totalPhone > 1) {
+      const updatedPhones = [...phones]
+      updatedPhones.splice(index, 1)
+      setPhones(updatedPhones)
+      setTotalPhone(totalPhone - 1)
+    }
+  }
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value)
@@ -48,11 +64,6 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
       ...props.contactData,
       phones: updatedPhones
     })
-  }
-
-  const addNumberInput = () => {
-    setTotalPhone(totalPhone + 1)
-    setPhones([...phones, { number: '' }])
   }
 
   return (
@@ -102,12 +113,15 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
         {phones?.map((phone, i) => [
           <InputWrapper
             label={`Number ${i + 1}`}
-            for="number"
+            for={`number${i + 1}`}
             disabled={!props.isEditing}
             required
-            // suffix={<></>}
+            suffix={
+              totalPhone > 1 && props.isEditing &&
+              <Minus css={actionIcon} onClick={removeNumberInput(i)}/>
+            }
             key={i}
-            >
+          >
             <input
               type='text'
               placeholder='Phone Number'

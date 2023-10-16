@@ -134,7 +134,7 @@ export default function ContactListPage() {
       >
         <ContactListContainer>
           <h4>Favorite(s)</h4>
-          {/* ide: masukin local storage lmao, but whatabout the real list? harus mutex!, pake where not? YEAH */}
+          {/* TODO: local storage, filter pagination with where */}
           <hr />
           <ContactList />
         </ContactListContainer>
