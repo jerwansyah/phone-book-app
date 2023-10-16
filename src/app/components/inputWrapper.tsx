@@ -27,9 +27,6 @@ const iconright = css({
   marginLeft: 'calc(100% - 40px)',
 
   svg : {
-    display: 'block',
-    // position: 'absolute',
-    right: '0px',
     path: {
       stroke: 'rgb(var(--primary-blue-medium))'
     }

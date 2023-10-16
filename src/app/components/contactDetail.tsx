@@ -11,7 +11,7 @@ import { actionIcon } from '../styles/icon'
 interface ContactDetailProps {
   isEditing?: boolean;
   contactData: { [key: string]: any };
-  setContactData: void;
+  setContactData?: void;
 }
 
 const ContactDetail: FC<ContactDetailProps> = (props) => {
@@ -20,7 +20,6 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
   const [phones, setPhones] = useState(props.contactData.phones)
 
   const [totalPhone, setTotalPhone] = useState(phones.length)
-  console.log('totalPhone', totalPhone)
   // TODO: add validator for phone
 
   const addNumberInput = () => {
@@ -28,7 +27,8 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
     setPhones((prevPhones) => [...prevPhones, { number: '' }])
   }
 
-  const removeNumberInput = (index) => {
+  const removeNumberInput = (e) => {
+    const index = e.target.getAttribute('data-index')
     if (totalPhone > 1) {
       const updatedPhones = [...phones]
       updatedPhones.splice(index, 1)
@@ -36,6 +36,8 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
       setTotalPhone(totalPhone - 1)
     }
   }
+
+  console.log('phones', phones)
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value)
@@ -113,12 +115,16 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
         {phones?.map((phone, i) => [
           <InputWrapper
             label={`Number ${i + 1}`}
-            for={`number${i + 1}`}
+            for={i}
             disabled={!props.isEditing}
             required
             suffix={
               totalPhone > 1 && props.isEditing &&
-              <Minus css={actionIcon} onClick={removeNumberInput(i)}/>
+              <Minus
+                css={actionIcon}
+                onClick={removeNumberInput}
+                data-index={i}
+              />
             }
             key={i}
           >
