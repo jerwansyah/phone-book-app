@@ -1,7 +1,6 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
-import Link from 'next/link'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { gql, useQuery } from '@apollo/client'
@@ -127,17 +126,19 @@ export default function ContactListPage() {
         {
           (data && data.contact) &&
           data.contact.map((item: any) => (
-            <Link
-              href={`/${item.id}`}
+            // <Link
+            //   href={`/${item.id}`}
+            //   key={item.id}
+            // >
+            <ContactListItem
               key={item.id}
-            >
-              <ContactListItem
-                firstName={item.first_name}
-                lastName={item.last_name}
-                phones={item.phones.map(
-                  (phone: { number: string | number }) => phone.number)}
-              />
-            </Link>
+              contactId={item.id}
+              firstName={item.first_name}
+              lastName={item.last_name}
+              phones={item.phones.map(
+                (phone: { number: string | number }) => phone.number)}
+            />
+            // </Link>
           ))
         }
         {

@@ -1,7 +1,7 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Link from 'next/link'

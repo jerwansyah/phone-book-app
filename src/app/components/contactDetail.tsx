@@ -15,11 +15,11 @@ interface ContactDetailProps {
 }
 
 const ContactDetail: FC<ContactDetailProps> = (props) => {
-  const [firstName, setFirstName] = useState(props.contactData.first_name)
-  const [lastName, setLastName] = useState(props.contactData.last_name)
-  const [phones, setPhones] = useState(props.contactData.phones)
+  const [firstName, setFirstName] = useState(props.contactData?.first_name)
+  const [lastName, setLastName] = useState(props.contactData?.last_name)
+  const [phones, setPhones] = useState(props.contactData?.phones)
 
-  const [totalPhone, setTotalPhone] = useState(phones.length)
+  const [totalPhone, setTotalPhone] = useState(phones?.length)
   // TODO: add validator for phone
 
   const addNumberInput = () => {

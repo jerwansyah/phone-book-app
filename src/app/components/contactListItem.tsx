@@ -1,12 +1,15 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styled from '@emotion/styled'
 import { mq } from '../styles/mediaQueries'
 import ContactIcon from './contactIcon'
+import { ContactListItemActions } from './contactListItemActions'
+import Link from 'next/link'
 
 interface ContactListItemProps {
+  contactId: string;
   firstName: string;
   lastName: string;
   phones: Array<number>;
@@ -57,29 +60,63 @@ const ProfileDetails = styled.div({
 })
 
 const ContactListItem: FC<ContactListItemProps> = (props) => {
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+  }
+
+  const handleDelete = () => {
+    console.log('delete', props.contactId)
+  }
+
   return (
     <>
-      <Item>
-        <ContactIcon />
-        <ProfileDetails>
-          <h4>{props.firstName} {props.lastName}</h4>
+      <Link href={`/${props.contactId}`}>
+        <Item
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          >
+          <ContactIcon />
+          <ProfileDetails>
+            <h4>{props.firstName} {props.lastName}</h4>
 
-          <div>
-            {
-              props.phones.slice(0, 2).map((number, i) => [
-                i > 0 && ', ',
-                <span
+            <div>
+              {
+                props.phones.slice(0, 2).map((number, i) => [
+                  i > 0 && ', ',
+                  <span
                   className='text-body-2'
                   key={i}
-                >
-                  {number}
-                </span>
-              ])
-            }
-            {props.phones.length > 2 && ', + more'}
-          </div>
-        </ProfileDetails>
-      </Item>
+                  >
+                    {number}
+                  </span>
+                ])
+              }
+              {props.phones.length > 2 && ', + more'}
+            </div>
+          </ProfileDetails>
+        </Item>
+      </Link>
+      {/* { isHovered && */}
+        <ContactListItemActions
+          css={{
+            // position: 'absolute',
+            marginLeft: 'auto',
+            // right: '0',
+            // top: '0',
+            // height: '100%',
+            // width: '80px',
+          }}
+          edit={handleDelete}
+          delete={() => console.log('delete')}
+          favorite={() => console.log('favorite')}
+        />
+      {/* } */}
     </>
   )
 }
