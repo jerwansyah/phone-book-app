@@ -1,9 +1,10 @@
 'use client'
 /** @jsxImportSource @emotion/react */
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { css } from '@emotion/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import { DELETE_CONTACT_BY_ID } from '../lib/deleteContactById'
 
@@ -12,8 +13,8 @@ import Edit1 from '../svg/edit-1.svg'
 import Heart from '../svg/heart.svg'
 // import HeartFilled from '../svg/heart-filled.svg'
 import Trash from '../svg/trash.svg'
-// import Check from '../svg/check.svg'
-// import Close from '../svg/close.svg'
+import Check from '../svg/check.svg'
+import Close from '../svg/close.svg'
 
 import Header from '../components/header'
 import { actionIcon, responsiveIcon } from '../styles/icon'
@@ -40,6 +41,17 @@ export default function ContactDetailPage({
   params
 }: { params: { id: string } }) {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const [isEditing, setIsEditing] = useState(false)
+
+  // useEffect(() => {
+  // setIsEditing(searchParams.get('edit') === 'true')
+  // console.log('edit param', searchParams.get('edit') === 'true')
+  // console.log('isEditing', isEditing)
+
+  // })
+  // }, [isEditing])
+
   const [deleteContact, { loading, error, data }] = useMutation(DELETE_CONTACT_BY_ID, {
     variables: { id: params.id }
   })
@@ -67,49 +79,98 @@ export default function ContactDetailPage({
     return (
       <>
         <ProfileIcon css={responsiveIcon(['80px', '184px'])} />
-        <ContactDetail contactData={data.contact_by_pk} />
+        <ContactDetail contactData={data.contact_by_pk} isEditing={isEditing}/>
       </>
     )
   }
 
+  const handleEdit = () => {
+    // router.push(`/${params.id}`)
+    setIsEditing(true)
+  }
+
+  const handleSubmitEdit = () => {
+    console.log('submit edit contact')
+  }
+
+  const handleDiscardEdit = () => {
+    console.log('discard edit contact')
+    setIsEditing(false)
+  }
+
   return (
     <>
-      <Header
-        title="Contact Detail"
-        left={
-          <Link href="/">
+      {!isEditing &&
+        <Header
+          title="Contact Detail"
+          left={
             <ArrowLeft
               css={[responsiveIcon(iconSizes), actionIcon]}
+              onClick={() => router.push('/')}
             />
-          </Link>
-        }
-        right={
-          <>
-            <Edit1
-              css={[responsiveIcon(iconSizes), actionIcon]}
-              onClick={() => console.log('edit')}
-            />
-            <Heart
-              css={[responsiveIcon(iconSizes), actionIcon]}
-            />
-            <Trash
-              css={
-                [
-                  responsiveIcon(iconSizes),
-                  actionIcon,
-                  css({
-                    path: {
-                      stroke: 'rgb(var(--danger-red-medium))'
-                    }
-                  })
-                ]
-              }
-              onClick={handleDelete}
-            />
-          </>
-        }
+          }
+          right={
+            <>
+              <Edit1
+                css={[responsiveIcon(iconSizes), actionIcon]}
+                onClick={handleEdit}
+              />
+              <Heart
+                css={[responsiveIcon(iconSizes), actionIcon]}
+              />
+              <Trash
+                css={
+                  [
+                    responsiveIcon(iconSizes),
+                    actionIcon,
+                    css({
+                      path: {
+                        stroke: 'rgb(var(--danger-red-medium))'
+                      }
+                    })
+                  ]
+                }
+                onClick={handleDelete}
+              />
+            </>
+          }
+        />
+      }
 
-      />
+      {isEditing &&
+        <Header
+          title="Edit Contact Detail"
+          textCenter
+          left={
+            <Close
+              css={[
+                responsiveIcon(iconSizes),
+                actionIcon,
+                css({
+                  path: {
+                    stroke: 'rgb(var(--danger-red-medium))'
+                  }
+                })
+              ]}
+              onClick={handleDiscardEdit}
+            />
+          }
+          right={
+            <Check
+              css={[
+                responsiveIcon(iconSizes),
+                actionIcon,
+                css({
+                  path: {
+                    stroke: 'rgb(var(--success-green-medium))'
+                  }
+                })
+              ]}
+              onClick={handleSubmitEdit}
+            />
+          }
+        />
+      }
       <main
         className='container'
         css={
@@ -123,6 +184,11 @@ export default function ContactDetailPage({
             [mq[0]]: {
               alignItems: 'flex-start',
               flexDirection: 'row'
+            },
+            marginTop: '64px',
+
+            [mq[0]]: {
+              marginTop: '76px'
             }
           }
         }

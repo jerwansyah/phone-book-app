@@ -106,7 +106,8 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
   }
 
   const handleEdit = () => {
-    console.log('edit')
+    router.push(`/${props.contactId}?edit=true`)
+    // TODO: change it!!!, edit is not queried?!??!?!
   }
 
   const [deleteContact, { loading, error, data }] = useMutation(DELETE_CONTACT_BY_ID, {
@@ -114,8 +115,6 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
   })
 
   const handleDelete = async () => {
-    console.log('delete', props.contactId)
-
     try {
       const result = await deleteContact({ variables: { id: props.contactId } })
         if (result?.data?.delete_contact_by_pk) {

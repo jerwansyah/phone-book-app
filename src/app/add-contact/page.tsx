@@ -134,6 +134,11 @@ export default function AddContactPage() {
                 alignItems: 'flex-start',
                 flexDirection: 'row',
                 // gap: '24px'
+              },
+              marginTop: '64px',
+
+              [mq[0]]: {
+                marginTop: '76px'
               }
             }
           }

@@ -4,15 +4,9 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-// import Link from 'next/link'
 
-// import Plus from './../svg/plus.svg'
-// import Search from './../svg/search.svg'
-// import Edit2 from './../svg/edit-2.svg'
-// import ArrowLeft from './../svg/arrow-left.svg'
 import { shadow4px } from '../styles/shadows'
 import { mq } from '../styles/mediaQueries'
-// import { actionIcon, responsiveIcon } fro../app/styles/iconcon'
 
 const headerStyle = css({
   padding: '20px 24px',
@@ -54,7 +48,12 @@ const Header = (props: any) => {
   return (
     <>
       <div
-        css={[shadow4px, css({ position : 'sticky', top: '0', width: '100%' })]}
+        css={
+          [
+            shadow4px,
+            css({ position : 'fixed', top: '0', width: '100%', zIndex: '99' })
+          ]
+        }
       >
         <header
           className='container'
