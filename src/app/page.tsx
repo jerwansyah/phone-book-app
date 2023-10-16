@@ -166,6 +166,7 @@ export default function ContactListPage() {
           {!isSearching &&
             <>
               <h4>Favorite(s)</h4>
+              <p className='text-body-3'>No favorite(s).</p>
               <hr />
             </>
           }

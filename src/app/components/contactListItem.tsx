@@ -26,7 +26,20 @@ const Item = styled.div({
 
   [mq[0]]: {
     gap: '24px'
+  },
+
+  position: 'relative',
+  '&:hover > div.actions': {
+    display: 'block'
   }
+})
+
+const ActionsContainer = styled.div({
+  display: 'none',
+  position: 'absolute',
+  right: 0,
+  top: '50%',
+  transform: 'translateY(-50%)'
 })
 
 const ProfileDetails = styled.div({
@@ -119,11 +132,7 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
   }
 
   return (
-    <div
-      css={{
-        // position: 'relative'
-      }}
-    >
+    <div>
       <Link href={`/${props.contactId}`}>
         <Item
           onMouseEnter={handleMouseEnter}
@@ -150,23 +159,18 @@ const ContactListItem: FC<ContactListItemProps> = (props) => {
               {props.phones.length > 2 && ', + more'}
             </div>
           </ProfileDetails>
+          {/* { isHovered || isHolding && */}
+          {/* { isHovered && */}
+          <ActionsContainer className='actions'>
+            <ContactListItemActions
+              edit={handleEdit}
+              delete={handleDelete}
+              favorite={handleFavorite}
+            />
+          </ActionsContainer>
+          {/* } */}
         </Item>
       </Link>
-      {/* { isHovered || isHolding && */}
-      {/* { isHovered && */}
-        <ContactListItemActions
-          css={{
-            position: 'relative',
-            marginTop: '-26px',
-            // zIndex: 1,
-            // right: '0',
-            // top: '0',
-          }}
-          edit={handleEdit}
-          delete={handleDelete}
-          favorite={handleFavorite}
-        />
-      {/* } */}
     </div>
   )
 }
