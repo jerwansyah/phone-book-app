@@ -13,9 +13,12 @@ export const global = css`
     --neutral-silver: 245, 247, 250;
     --neutral-white: 255, 255, 255;
 
+    --primary-blue-dark: 0, 83, 173;
+    --primary-navy: 6, 99, 199;
     --primary-blue-medium: 6, 113, 224;
+    --primary-azure: 65, 150, 240;
+    --primary-sky: 219, 237, 255;
     --primary-blue-light: 238, 245, 252;
-    --primary-azure: 219, 237, 255;
 
     --danger-red-medium: 224, 43, 29;
     --danger-red-light: 224, 21, 7;

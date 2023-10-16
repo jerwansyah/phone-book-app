@@ -9,19 +9,13 @@ export const resets = css`
     margin: 0;
   }
 
+  label,
   button,
   input,
   select,
   textarea {
     color: rgb(var(--neutral-black, #212121));
-  }
-
-  label,
-  input,
-  button,
-  select,
-  textarea {
-    // font-family: var(--font-family, 'Inter');
+    font-family: var(--font-family, 'Inter');
   }
 
   ::-moz-selection {

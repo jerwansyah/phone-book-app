@@ -143,6 +143,7 @@ export default function AddContactPage() {
             isEditing={true}
             contactData={contactData}
             setContactData={setContactData}
+            css={css`: center;`}
           />
         </div>
       </main>

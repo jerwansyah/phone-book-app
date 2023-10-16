@@ -4,6 +4,7 @@
 import React, { FC, useState } from 'react'
 import { mq } from '../styles/mediaQueries'
 import InputWrapper from './inputWrapper'
+import Plus from './../svg/plus.svg'
 
 interface ContactDetailProps {
   isEditing?: boolean;
@@ -62,6 +63,7 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'center',
             gap: '24px',
             [mq[0]]: { maxWidth: '450px'}
           }
@@ -118,10 +120,20 @@ const ContactDetail: FC<ContactDetailProps> = (props) => {
         ])}
         {props.isEditing &&
           <button
-            className="btn-tertiary"
+            className="btn btn-tertiary btn-small"
             onClick={addNumberInput}
           >
-            Add Number +
+            <Plus
+              css={{
+                width: '16px',
+                height: '16px',
+                path: {
+                  stroke: 'rgb(var(--primary-blue-medium))'
+                },
+                marginRight: '8px'
+              }}
+            />
+            Add New Number
           </button>
         }
       </div>
